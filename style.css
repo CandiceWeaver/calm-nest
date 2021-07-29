@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(41, 56, 76, 0.8),
+      rgba(131, 141, 160, 0.8)
+    ),
+    url(images/background.jpg);
+  background-position: center;
+  background-size: cover;
+  color: #e8e9e9;
+  font-family: 'Gowun Dodum', sans-serif;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  letter-spacing: 0.2rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.meditate-btn {
+  background-color: transparent;
+  border: 0.2rem solid #e8e9e9;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18.75rem;
+  width: 18.75rem;
+  margin: auto;
+  position: relative;
+  font-size: 1.25rem;
+  transform: scale(1);
+}
+
+.gradient-circle {
+  background: conic-gradient(
+    #838da0 0%,
+    #838da0 40%,
+    #e8e9e9 40%,
+    #e8e9e9 60%,
+    #444352 60%,
+    #444352 100%
+  );
+  height: 20rem;
+  width: 20rem;
+  top: -0.6rem;
+  left: -0.6rem;
+  z-index: -2;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.circle {
+  background-color: #29384c;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.pointer-container {
+  position: absolute;
+  top: -2.5rem;
+  left: 8.75rem;
+  width: 1.25rem;
+  height: 11.9rem;
+  transform-origin: bottom center;
+}
+
+.pointer {
+  background-color: #e8e9e9;
+  border-radius: 50%;
+  height: 1.25rem;
+  width: 1.25rem;
+  display: block;
+}
+
+.container.grow {
+  animation: grow 3s linear forwards;
+}
+
+.container.shrink {
+  animation: shrink 3s linear forwards;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
