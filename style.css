@@ -8,7 +8,7 @@ body {
       rgba(41, 56, 76, 0.8),
       rgba(131, 141, 160, 0.8)
     ),
-    url(images/background.jpg);
+    url(images/background-blue.jpg);
   background-position: center;
   background-size: cover;
   color: #e8e9e9;
@@ -26,6 +26,17 @@ h1 {
   font-size: 3rem;
 }
 
+.timer {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.time-left {
+  display: flex;
+  width: 15rem;
+  justify-content: space-between;
+}
+
 .meditate-btn {
   background-color: transparent;
   border: 0.2rem solid #e8e9e9;
@@ -34,8 +45,11 @@ h1 {
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: inherit;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 2.5rem;
 }
 
 .container {
@@ -102,6 +116,71 @@ h1 {
 
 .container.shrink {
   animation: shrink 3s linear forwards;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+.colours {
+  display: flex;
+  width: 40rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.colour {
+  border: 0.2rem solid #e8e9e9;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  box-shadow: 0.1rem 0.1rem 0.2rem #000;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.colour:hover {
+  transform: scale(1.2);
+}
+
+.red {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(175, 41, 4, 0.8),
+    rgba(244, 124, 60, 0.8)
+  );
+}
+
+.purple {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(128, 112, 184, 0.8),
+    rgba(212, 161, 241, 0.8)
+  );
+}
+
+.blue {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(41, 56, 76, 0.8),
+    rgba(131, 141, 160, 0.8)
+  );
+}
+
+.green {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(53, 70, 27, 0.8),
+    rgba(142, 178, 102, 0.8)
+  );
+}
+
+.yellow {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(195, 153, 93, 0.8),
+    rgba(250, 216, 110, 0.8)
+  );
 }
 
 @keyframes rotate {
