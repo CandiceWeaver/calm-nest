@@ -1,6 +1,5 @@
 'use strict';
 
-//////////////////////////////////////////////////////////////////////////////////////////
 // Query selectors
 const body = document.querySelector('body');
 const container = document.querySelector('.container');
@@ -9,6 +8,7 @@ const circle = document.querySelector('.circle');
 const pointerContainer = document.querySelector('.pointer-container');
 const pointer = document.querySelector('.pointer');
 const gradientCircle = document.querySelector('.gradient-circle');
+const timeLeft = document.getElementById('time-left');
 const meditateBtn = document.querySelector('.meditate-btn');
 const colour = document.querySelectorAll('.colour');
 const redColour = document.querySelector('.red');
@@ -17,16 +17,16 @@ const blueColour = document.querySelector('.blue');
 const greenColour = document.querySelector('.green');
 const yellowColour = document.querySelector('.yellow');
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// Breathing animations
+/////////////////////////////////////////////////////////////////////////////////////
+// Timer and animations
 
-// Variables for breathing times
+// Breathing animations
 let totalTime = 7500;
 const breatheTime = (totalTime / 5) * 2;
 const holdTime = totalTime / 5;
 
 // Function for starting the breathing animations
-function BreatheAnimation() {
+function breatheAnimation() {
   text.innerText = 'Breathe in';
   container.className = 'container grow';
   pointerContainer.style.animation = 'rotate 7.5s linear forwards infinite';
@@ -41,15 +41,73 @@ function BreatheAnimation() {
   }, breatheTime);
 }
 
-BreatheAnimation();
-setInterval(BreatheAnimation, totalTime);
+// Countdown timer functionality
+const startingMins = 10;
+let time = startingMins * 60 - 1;
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// Countdown timer
+const updateCountdown = () => {
+  let mins = Math.floor(time / 60);
+  let secs = time % 60;
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// Changing the theme colours
+  mins = mins < 10 ? '0' + mins : mins;
+  secs = secs < 10 ? '0' + secs : secs;
+  timeLeft.innerText = `${mins}:${secs}`;
 
+  if (time === 0) {
+    timerStop();
+  }
+
+  time--;
+};
+
+let countdownInterval, animationInterval;
+
+// Function for resetting timer
+const timerStop = () => {
+  clearInterval(countdownInterval);
+  clearInterval(animationInterval);
+
+  timeLeft.innerText = ``;
+  meditateBtn.innerText = `START`;
+  time = startingMins * 60 - 1;
+
+  container.className = 'container';
+  pointerContainer.style.animation = 'rotate 7.5s linear forwards 1';
+};
+
+// Start countdown timer and animations
+let countdown;
+meditateBtn.addEventListener('click', () => {
+  countdown = !countdown;
+  console.log(countdown);
+
+  if (countdown) {
+    meditateBtn.innerText = `RESET`;
+    countdownInterval = setInterval(updateCountdown, 1000);
+    breatheAnimation();
+    animationInterval = setInterval(breatheAnimation, totalTime);
+  } else {
+    timerStop();
+  }
+});
+
+// meditateBtn.addEventListener('click', () => {
+//   timer = !timer;
+//   console.log(timer);
+
+//   if (timer) {
+//     countdownInterval = setInterval(updateCountdown, 1000);
+//     breatheAnimation();
+//     animationInterval = setInterval(breatheAnimation, totalTime);
+//   } else {
+//     timerStop();
+//   }
+// });
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Theme change
+
+// Changing hex colours to RGB for gradients
 const hexToRgb = hex => {
   const validHexInput = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let output = {
@@ -61,6 +119,7 @@ const hexToRgb = hex => {
   return `${outputArray[0]}, ${outputArray[1]}, ${outputArray[2]}`;
 };
 
+// Changing the theme
 const changeTheme = (photoColour, colour1, colour2, colour3, colour4) => {
   console.log(photoColour);
   body.style.color = colour1;
@@ -69,6 +128,8 @@ const changeTheme = (photoColour, colour1, colour2, colour3, colour4) => {
   )}, 0.8), rgba(${hexToRgb(
     colour3
   )}, 0.8)), url(images/background-${photoColour}.jpg)`;
+  countdownEl.style.border = `0.2rem solid ${colour1}`;
+  meditateBtn.style.border = `0.2rem solid ${colour1}`;
   gradientCircle.style.background = `conic-gradient(${colour3} 0%, ${colour3} 40%, ${colour1} 40%, ${colour1} 60%, ${colour4} 60%, ${colour4} 100%)`;
   pointer.style.background = colour1;
   circle.style.background = colour2;
@@ -78,6 +139,7 @@ const changeTheme = (photoColour, colour1, colour2, colour3, colour4) => {
   }
 };
 
+// Event listeners
 redColour.addEventListener(
   'click',
   () => {
@@ -105,7 +167,7 @@ blueColour.addEventListener(
 greenColour.addEventListener(
   'click',
   () => {
-    changeTheme('green', '#6D8B44', '#D3D7CC', '#35461B', '#8EB266');
+    changeTheme('green', ' #D3D7CC', '#35461B', '#8EB266', '#6D8B44');
   },
   false
 );
