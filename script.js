@@ -121,14 +121,12 @@ const hexToRgb = hex => {
 
 // Changing the theme
 const changeTheme = (photoColour, colour1, colour2, colour3, colour4) => {
-  console.log(photoColour);
   body.style.color = colour1;
   body.style.backgroundImage = `linear-gradient(to right bottom, rgba(${hexToRgb(
     colour2
   )}, 0.8), rgba(${hexToRgb(
     colour3
   )}, 0.8)), url(images/background-${photoColour}.jpg)`;
-  countdownEl.style.border = `0.2rem solid ${colour1}`;
   meditateBtn.style.border = `0.2rem solid ${colour1}`;
   gradientCircle.style.background = `conic-gradient(${colour3} 0%, ${colour3} 40%, ${colour1} 40%, ${colour1} 60%, ${colour4} 60%, ${colour4} 100%)`;
   pointer.style.background = colour1;
