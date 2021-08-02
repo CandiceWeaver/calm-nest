@@ -67,7 +67,7 @@ const timerStop = () => {
   clearInterval(countdownInterval);
   clearInterval(animationInterval);
 
-  timeLeft.innerText = ``;
+  timeLeft.innerText = `10:00`;
   meditateBtn.innerText = `START`;
   time = startingMins * 60 - 1;
 
